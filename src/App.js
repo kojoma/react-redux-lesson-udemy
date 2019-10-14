@@ -1,30 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
-const App = () => {
-  const users = [
-    {name: "Taro", age: 12},
-    {name: "Hanako", age: 20},
-    {name: "Nanashi", age: 100},
-  ];
-  return (
-    <div>
-      {
-        users.map((u, index) => {
-          return <User name={u.name} age={u.age} key={index}/>
-        })
-      }
-    </div>
-  );
-};
+const App = () => (<Counter></Counter>);
 
-const User = (props) => {
-  return <div>Hi {props.name} I'm {props.age} years old.</div>
-};
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      message: ""
+    };
+  }
 
-User.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.number.isRequired
-};
+  handlePlusButton = () => {
+    if (this.state.count < 10) {
+      this.setState({ count: this.state.count + 1, message: "" });
+    } else {
+      this.setState({ message: "count can only be raised to 10" });
+    }
+  };
+
+  handleMinusButton = () => {
+    if (this.state.count > 0) {
+      this.setState({ count: this.state.count - 1, message: "" });
+    } else {
+      this.setState({ message: "count can only be lowered to 0" });
+    }
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <div>count: { this.state.count }</div>
+        <button onClick={ this.handlePlusButton}>+1</button>
+        <button onClick={ this.handleMinusButton}>-1</button>
+        <p>{ this.state.message }</p>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;
