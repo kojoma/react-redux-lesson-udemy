@@ -1,13 +1,14 @@
+import { mapKeys } from 'lodash';
 import { READ_EVENTS } from "../actions";
 
-const initialState = { value: 0 };
+const initialState = {};
 
-export default (state = initialState, action) => {
+export default (events = initialState, action) => {
   switch (action.type) {
     case READ_EVENTS: {
-      return state;
+      return mapKeys(action.response.data, 'id');
     }
     default:
-      return state;
+      return events;
   }
 };
