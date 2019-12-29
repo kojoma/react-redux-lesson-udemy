@@ -33,7 +33,7 @@ class EventsShow extends Component {
   }
 
   async onSubmit(values) {
-    // await this.props.postEvents(values);
+    await this.props.putEvent(values);
     this.props.history.push('/');
   }
 
@@ -83,7 +83,7 @@ const mapStateToProps = (state, ownProps) => {
   return { initialValues: event, state };
 };
 
-const mapDispatchToProps = ({ deleteEvent, getEvent });
+const mapDispatchToProps = ({ deleteEvent, getEvent, putEvent });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({ validate, form: 'eventShowForm', enableReinitialize: true })(EventsShow)
