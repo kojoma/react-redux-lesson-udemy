@@ -1,5 +1,11 @@
 import { mapKeys } from 'lodash';
-import { READ_EVENTS, READ_EVENT, DELETE_EVENT } from "../actions";
+import {
+  CREATE_EVENT,
+  READ_EVENTS,
+  READ_EVENT,
+  UPDATE_EVENT,
+  DELETE_EVENT
+} from "../actions";
 
 const initialState = {};
 
@@ -8,7 +14,9 @@ export default (events = initialState, action) => {
     case READ_EVENTS: {
       return mapKeys(action.response.data, 'id');
     }
-    case READ_EVENT: {
+    case CREATE_EVENT:
+    case READ_EVENT:
+    case UPDATE_EVENT: {
       const data = action.response.data;
       return { ...events, [data.id]: data };
     }
